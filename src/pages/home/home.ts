@@ -17,4 +17,8 @@ export class HomePage {
     this.navCtrl.setRoot(DashboardPage);
   }
 
+
+  public addentry() {
+    
+  }
 }

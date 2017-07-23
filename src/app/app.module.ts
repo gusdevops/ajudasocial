@@ -17,10 +17,24 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environment/environment';
+// import { environment } from '../environment/environment';
 import { LocationProvider } from '../providers/location/location';
 import { LoginProvider } from '../providers/login/login';
 import { ServiceProvider } from '../providers/service/service';
+import { ServiceHelperProvider } from '../providers/service-helper/service-helper';
+
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyAuDUngJpxMkLCVBNLTfw1vVowDSnT_e5U",
+    authDomain: "ajuda-fd991.firebaseapp.com",
+    databaseURL: "https://ajuda-fd991.firebaseio.com",
+    projectId: "ajuda-fd991",
+    storageBucket: "ajuda-fd991.appspot.com",
+    messagingSenderId: "579700721779"
+  }
+};
+
 
 
 @NgModule({
@@ -33,7 +47,7 @@ import { ServiceProvider } from '../providers/service/service';
     DashboardPage
   ],
   imports: [
-    AngularFireModule.initializeApp(environment), AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -53,7 +67,8 @@ import { ServiceProvider } from '../providers/service/service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LocationProvider,
     LoginProvider,
-    ServiceProvider
+    ServiceProvider,
+    ServiceHelperProvider
   ]
 })
 export class AppModule {}
