@@ -7,9 +7,21 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+
+//Angular firebase
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environment/environment';
+import { LocationProvider } from '../providers/location/location';
+import { LoginProvider } from '../providers/login/login';
+import { ServiceProvider } from '../providers/service/service';
+
 
 @NgModule({
   declarations: [
@@ -17,24 +29,31 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    DashboardPage
   ],
   imports: [
+    AngularFireModule.initializeApp(environment), AngularFireDatabaseModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [IonicApp, MyApp],
   entryComponents: [
     MyApp,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    DashboardPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    AngularFireDatabaseModule,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    LocationProvider,
+    LoginProvider,
+    ServiceProvider
   ]
 })
 export class AppModule {}
