@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/map';
 
 /*
@@ -11,8 +14,19 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LoginProvider {
 
-  constructor(public http: Http) {
+  user: Observable<firebase.User>;
+
+  constructor(public http: Http, public afAuth: AngularFireAuth) {
     console.log('Hello LoginProvider Provider');
+  }
+
+
+  login() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
   }
 
 }
